@@ -710,7 +710,9 @@ namespace NLua
             {
                 _luaState.PushString(remainingPath[i]);
                 _luaState.GetTable(-2);
+                var oldValue = returnValue;
                 returnValue = _translator.GetObject(_luaState, -1);
+                (oldValue as LuaBase)?.Dispose();
 
                 if (returnValue == null)
                     break;
