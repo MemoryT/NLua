@@ -461,9 +461,11 @@ namespace NLua
                 {
                     // Get the index in a form acceptable to the getter
                     index = _translator.GetAsType(luaState, 2, actualParams[0].ParameterType);
-                    object[] args = new object[1];
+                    if (index == null)
+                        continue;
 
                     // Just call the indexer - if out of bounds an exception will happen
+                    object[] args = new object[1];
                     args[0] = index;
 
                     try
